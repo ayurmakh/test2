@@ -20,9 +20,21 @@ export default {
     ways() {     
       var chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
       var res = '';
-			var x = chars.indexOf(this.cell[0]);
-			var y = parseInt(this.cell[1]);
-			for (let i = 1; i < 9; i++) 
+
+      if (this.cell == '') {
+        alert('Введены некорректные данные!');  
+        return;
+      }
+
+			var x = chars.indexOf(this.cell[0].toUpperCase());
+      var y = parseInt(this.cell[1]) - 1;
+
+      if ((x < 0) || (x > 7) || isNaN(x) || (y < 0) || (y > 7) || isNaN(y)) {
+        alert('Введены некорректные данные!');  
+        return;
+      }
+      
+			for (let i = 0; i < 8; i++) 
 				for (let j = 0; j < chars.length; j++) 
 					if (
 							((j == x - 2) && ((i == y - 1) || (i == y + 1))) ||
@@ -30,7 +42,7 @@ export default {
 							((j == x + 1) && ((i == y - 2) || (i == y + 2))) ||
 							((j == x + 2) && ((i == y - 1) || (i == y + 1)))
 						)	
-						res = res + chars[j] + i + ' ';
+						res = res + chars[j] + (i + 1) + ' ';
 			alert(res);
     }
   }
